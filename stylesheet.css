@@ -1,0 +1,189 @@
+body {
+    background-image: url(https://i.pinimg.com/originals/3a/a4/6f/3aa46f5701fc6ed92234ea0a9f86e2cd.gif);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: cursive;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    min-height: 70vh; /* Ensure body takes up full viewport height */
+}
+
+.background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+    text-align: center;
+    color: rgba(245, 245, 220, 0.95);
+    font-size: clamp(10px, 5vw, 30px);
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgb(27, 52, 61, 0.8);
+}
+
+.container {
+    background-color: rgb(193, 214, 109, 0.8);
+    display: flex;
+    width: 410px;
+    height: 210px;
+    border-radius: 30px;
+    border: 2px solid rgb(134, 94, 71, 0.5);
+    margin: auto;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center items inside box */
+    justify-content: center;
+    text-align: center;
+    font-style: italic;
+    position: relative; /* Positions the text absolutely within the box */
+    backdrop-filter: blur(2px);
+}
+
+.timer-text {
+    font-size: clamp(90px, 10vw, 90px);
+    color: rgb(0, 0, 0,0.7);
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+
+.button-container .start-btn {
+    background: rgb(52, 141, 76, 0.5);
+    border-radius: 10px;
+    font-size: 13px;
+    color: #fff;
+    font-family: cursive;
+}
+
+.button-container .start-btn:hover {
+    background: #1B343D;
+}
+
+.button-container .pause-btn {
+    background:  rgb(52, 141, 76, 0.5);
+    border-radius: 10px;
+    font-size: 13px;
+    color: #fff;
+    font-family: cursive;
+}
+
+.button-container .pause-btn:hover {
+    background: #1B343D;
+}
+
+.button-container .break-btn {
+    background:  rgb(52, 141, 76, 0.5);
+    border-radius: 10px;
+    font-size: 13px;
+    color: #fff;
+    font-family: cursive;
+}
+
+.button-container .break-btn:hover {
+    background: #1B343D;
+}
+
+.button-container .reset-btn {
+    background: rgb(52, 141, 76, 0.5);
+    border-radius: 10px;
+    font-size: 13px;
+    color: #fff;
+    font-family: cursive;
+}
+
+.button-container .reset-btn:hover {
+    background: #1B343D;
+}
+
+.to-do-list-container {
+    margin-top: 20px;
+    text-align: left;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.to-do-list-container h4 {
+    text-align: left;
+    color: #f5f5dc;
+    font-size: clamp(10px, 4vw, 20px);
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.task-list {
+    list-style-type: none;
+    padding-left: 5px;
+    margin-bottom: 10px;
+}
+
+.task-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    font-family: cursive;
+    margin-bottom: 5px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    background: rgb(208, 128, 104, 0.94);
+    text-align: left;;
+    cursor: pointer;
+    font-size: clamp(14px, 2.5vw, 18px);
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.task-item.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.task-item .delete-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: right;
+}
+
+.task-input {
+    width: 60%;
+    padding: 6px 7px;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-family: cursive;
+    border: 1px solid #ccc;
+}
+
+.add-task-btn {
+    padding: 6px 6px;
+    border-radius: 5px;
+    border: none;
+    font-family: cursive;
+    background: rgb(208, 128, 104, 0.85);
+    cursor: pointer;
+    color: #fff;
+}
+
+.add-task-btn:hover {
+    background: #1B343D;
+}
+
+.task-warning {
+    color: #900;
+    font-size: 14px;
+    margin-top: 5px;
+    font-style: italic;
+    min-height: 18px;       /* keep space even if empty */
+    display: none;          /* hide by default */
+}
+
+
+
