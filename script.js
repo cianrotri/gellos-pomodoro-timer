@@ -215,16 +215,29 @@ function resetTimer() {
 function breakTimer() {
     clearInterval(timerInterval);
     isRunning = false;
-    
-    let totalFocusSeconds = timerHours * 3600 + timerMinutes * 60 + timerSeconds;
-    let breakSeconds = Math.ceil(totalFocusSeconds * 0.4);
 
-    timerHours = Math.floor(breakSeconds / 3600);
-    timerMinutes = Math.floor((breakSeconds % 3600) / 60);
-    timerSeconds = breakSeconds % 60;
-    updateDisplay();
+    if (mode === "pomodoro") {
+        // In Pomodoro mode, switch phase immediately
+        if (pomodoroPhase === "focus") {
+            pomodoroPhase = "break";
+            alert("Break time!");
+            setPomodoroTime(POMODORO_BREAK);
+        } else {
+            alert("Already on break!");
+        }
+        startTimer();
+    } else {
+        // Old custom behavior
+        let totalFocusSeconds = timerHours * 3600 + timerMinutes * 60 + timerSeconds;
+        let breakSeconds = Math.ceil(totalFocusSeconds * 0.4);
 
-    startBreakCountdown();
+        timerHours = Math.floor(breakSeconds / 3600);
+        timerMinutes = Math.floor((breakSeconds % 3600) / 60);
+        timerSeconds = breakSeconds % 60;
+        updateDisplay();
+
+        startBreakCountdown();
+    }
 }
 
 let audioUnlocked = false;
