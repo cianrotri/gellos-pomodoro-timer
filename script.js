@@ -49,6 +49,39 @@ taskInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") addTaskBtn.click();
 });
 
+//FOR MODE SWITCHING 
+
+let mode = "custom"; // "custom" or "pomodoro"
+let pomodoroPhase = "focus"; // "focus" or "break"
+
+const POMODORO_FOCUS = 45 * 60; // 45 min
+const POMODORO_BREAK = 15 * 60;  // 15 min
+
+const customModeBtn = document.querySelector(".custom-mode-btn");
+const pomodoroModeBtn = document.querySelector(".pomodoro-mode-btn");
+
+customModeBtn.addEventListener("click", () => {
+    mode = "custom";
+    resetTimer();
+});
+
+pomodoroModeBtn.addEventListener("click", () => {
+    mode = "pomodoro";
+    pomodoroPhase = "focus";
+    setPomodoroTime(POMODORO_FOCUS);
+});
+
+function setPomodoroTime(totalSeconds) {
+    clearInterval(timerInterval);
+    isRunning = false;
+
+    timerHours = Math.floor(totalSeconds / 3600);
+    timerMinutes = Math.floor((totalSeconds % 3600) / 60);
+    timerSeconds = totalSeconds % 60;
+
+    updateDisplay();
+}
+
 // TIMER 
 
 let timerHours = 0;
@@ -108,15 +141,52 @@ function startTimer() {
     isRunning = true;
 
     timerInterval = setInterval(() => {
-        timerSeconds++;
-        if (timerSeconds === 60) {
-            timerSeconds = 0;
-            timerMinutes++;
+
+        if (mode === "custom") {
+            // your original stopwatch behavior
+            timerSeconds++;
+            if (timerSeconds === 60) {
+                timerSeconds = 0;
+                timerMinutes++;
+            }
+            if (timerMinutes === 60) {
+                timerMinutes = 0;
+                timerHours++;
+            }
+
+        } else if (mode === "pomodoro") {
+            // countdown behavior
+            if (timerSeconds === 0) {
+                if (timerMinutes === 0) {
+                    if (timerHours === 0) {
+                        // SWITCH PHASE
+                        alarmSound.play();
+
+                        if (pomodoroPhase === "focus") {
+                            pomodoroPhase = "break";
+                            alert("Break time!");
+                            setPomodoroTime(POMODORO_BREAK);
+                        } else {
+                            pomodoroPhase = "focus";
+                            alert("Back to focus!");
+                            setPomodoroTime(POMODORO_FOCUS);
+                        }
+
+                        return;
+                    } else {
+                        timerHours--;
+                        timerMinutes = 59;
+                        timerSeconds = 59;
+                    }
+                } else {
+                    timerMinutes--;
+                    timerSeconds = 59;
+                }
+            } else {
+                timerSeconds--;
+            }
         }
-        if (timerMinutes === 60) {
-            timerMinutes = 0;
-            timerHours++;
-        }
+
         updateDisplay();
     }, 1000);
 }
@@ -129,12 +199,17 @@ function pauseTimer() {
 
 function resetTimer() {
     clearInterval(timerInterval);
-    timerHours = 0;
-    timerMinutes = 0;
-    timerSeconds = 0;
-    focusMinutes = 0;
     isRunning = false;
-    updateDisplay();
+
+    if (mode === "pomodoro") {
+        pomodoroPhase = "focus";
+        setPomodoroTime(POMODORO_FOCUS);
+    } else {
+        timerHours = 0;
+        timerMinutes = 0;
+        timerSeconds = 0;
+        updateDisplay();
+    }
 }
 
 function breakTimer() {
